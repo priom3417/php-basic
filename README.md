@@ -73,7 +73,11 @@ echo $sum($arr1); //Invoking the function variable
    $books2 = filterBooks($books, 'releaseYear', 2011);
    ```
 
-   So, the above function will be able to filter the books by the author name, book name or by the release year. But, what if we want to filter the books that released before 2020? What if we want to filter the books where author name is X and released before YYYY? In that case, we can use a Lambda function so that the `filterBooks()` function can accepts a Lambda function as a parameter and can perform custom filtering.
+   So, the above function will be able to filter the books by the author name, book name or by the release year. But, what if we want to filter the books that released before 2020? What if we want to filter the books where author name is X and released before YYYY?
+   
+   Will we write a separate function of each of the custom condition? Like, `filterBooksBefore2020()`, `filterBooksBefore2020ByX()`. No.....
+   
+   In that case, we can use a Lambda function so that the `filterBooks()` function can accepts a Lambda function as a parameter and can perform custom filtering.
 
    ```php
    function filterBooks($records, $fn){
