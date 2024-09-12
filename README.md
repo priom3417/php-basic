@@ -1,4 +1,3 @@
-```md
 # PHP Basics
 
 ## Table of Contents
@@ -107,5 +106,3 @@ echo $sum($arr1);
        return $record['releaseYear'] < 2020 && $record['author'] == 'Andy Weir';
    });
    ```
-
-```
