@@ -16,7 +16,7 @@ $var = function ($arg1, $arg2) { return $val; }; // No specific name. Stored in 
 ```php
 $arr1 = [4, 12, 6, 23, 16, 20];
 
-$sum = function($arr){
+$sum = function($arr){ //Function stored in a variable
     $s = 0;
     for($i = 0; $i < sizeof($arr); $i++){
         $s += $arr[$i];
@@ -24,12 +24,12 @@ $sum = function($arr){
     return $s;
 };
 
-echo $sum($arr1);
+echo $sum($arr1); //Invoking the function variable
 ```
 
 ### Example 2
 
-1. **Filtering records from an associative array depending on a custom condition**:
+**Filtering records from an associative array depending on a custom condition**:
 
    Let's take the following associative array of books:
 
@@ -73,7 +73,7 @@ echo $sum($arr1);
    $books2 = filterBooks($books, 'releaseYear', 2011);
    ```
 
-   So, the above function will be able to filter the books by the author name, book name or by the release year. But, what if we want to filter the books that released before 2020? What if we want to filter the books where author name is X and released before YYYY? In that case, we can use a Lambda function so that the `filterBooks` function can accepts a Lambda function as a parameter and can perform custom filtering.
+   So, the above function will be able to filter the books by the author name, book name or by the release year. But, what if we want to filter the books that released before 2020? What if we want to filter the books where author name is X and released before YYYY? In that case, we can use a Lambda function so that the `filterBooks()` function can accepts a Lambda function as a parameter and can perform custom filtering.
 
    ```php
    function filterBooks($records, $fn){
