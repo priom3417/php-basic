@@ -1,10 +1,10 @@
 <?php
 
 return [
-    '/my/php-basic/' => 'controllers/index.php',
-    '/my/php-basic/about' => 'controllers/about.php',
-    '/my/php-basic/contact' => 'controllers/contact.php',
-    '/my/php-basic/notes' => 'controllers/notes.php',
-    '/my/php-basic/note' => 'controllers/note.php',
-    '/my/php-basic/create-note' => 'controllers/create-notes.php',
+    '/' => 'controllers/index.php',
+    '/about' => 'controllers/about.php',
+    '/contact' => 'controllers/contact.php',
+    '/notes' => 'controllers/notes/index.php',
+    '/notes/show' => 'controllers/notes/show.php',
+    '/notes/create' => 'controllers/notes/create.php',
 ];

@@ -42,6 +42,10 @@ function authorize($condition, $code){
 
 }
 
+function base_path($path){
+    return BASE_PATH . $path;
+}
+
 $books = [
     [
         'name' => 'Do Androids Dream of Electric Sheep',

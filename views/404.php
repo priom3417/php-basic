@@ -11,4 +11,4 @@
     </div>
 </main>
 
-<?php require('partials/footer.php') ?>
+<?php require(base_path('partials/footer.php')) ?>

@@ -1,6 +1,6 @@
 RewriteEngine On
-RewriteBase /my/php-basic/
+RewriteBase /
 RewriteRule ^index\\.php$ - [L]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule . /my/php-basic/index.php [L]
+RewriteRule . index.php [L]
