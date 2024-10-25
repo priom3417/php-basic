@@ -3,6 +3,9 @@
 ## Table of Contents
 - [Lambda Functions](#lambda-functions)
 - [PHP Router](#php-router)
+- [Commpnly Used PHP functions](#array_map)
+    - [array_map()](#array_map)
+
 
 ## Lambda Functions
 
@@ -177,4 +180,185 @@ switch ($route) {
         require __DIR__ . '/server/customer/order.php';
         break;
 }
+```
+
+
+
+## array_map()
+
+### Description
+`array_map(?callable $callback, array $array, array ...$arrays): array`
+
+The `array_map()` function in PHP returns an array containing the results of applying a callback function to each element of an input array. When multiple arrays are used, the function applies the callback in parallel to each set of corresponding elements.
+
+---
+
+### Example #1: Basic array_map() Example
+
+```php
+function cube($n) {
+    return $n * $n * $n;
+}
+
+$a = [1, 2, 3, 4, 5];
+$b = array_map('cube', $a);
+print_r($b);
+```
+
+**Output:**
+
+```plaintext
+Array
+(
+    [0] => 1
+    [1] => 8
+    [2] => 27
+    [3] => 64
+    [4] => 125
+)
+```
+
+---
+
+### Example #2: Using a Lambda Function with array_map()
+
+```php
+$func = function(int $value): int {
+    return $value * 2;
+};
+
+print_r(array_map($func, range(1, 5)));
+
+// Or with PHP 7.4+:
+print_r(array_map(fn($value): int => $value * 2, range(1, 5)));
+```
+
+**Output:**
+
+```plaintext
+Array
+(
+    [0] => 2
+    [1] => 4
+    [2] => 6
+    [3] => 8
+    [4] => 10
+)
+```
+
+---
+
+### Example #3: Using Multiple Arrays
+
+```php
+function show_Spanish(int $n, string $m): string {
+    return "The number {$n} is called {$m} in Spanish";
+}
+
+$a = [1, 2, 3, 4, 5];
+$b = ['uno', 'dos', 'tres', 'cuatro', 'cinco'];
+
+$c = array_map('show_Spanish', $a, $b);
+print_r($c);
+```
+
+**Output:**
+
+```plaintext
+Array
+(
+    [0] => The number 1 is called uno in Spanish
+    [1] => The number 2 is called dos in Spanish
+    [2] => The number 3 is called tres in Spanish
+    [3] => The number 4 is called cuatro in Spanish
+    [4] => The number 5 is called cinco in Spanish
+)
+```
+Usually, when using two or more arrays, they should be of equal length because the callback function is applied in parallel to the corresponding elements. If the arrays are of unequal length, shorter ones will be extended with empty elements to match the length of the longest.
+
+An interesting use of this function is to construct an array of arrays, which can be easily performed by using null as the name of the callback function.
+
+---
+
+### Example #4: Performing a Zip Operation with Null Callback
+
+```php
+$a = [1, 2, 3, 4, 5];
+$b = ['one', 'two', 'three', 'four', 'five'];
+$c = ['uno', 'dos', 'tres', 'cuatro', 'cinco'];
+
+$d = array_map(null, $a, $b, $c);
+print_r($d);
+```
+
+**Output:**
+
+```plaintext
+Array
+(
+    [0] => Array ( [0] => 1 [1] => one [2] => uno )
+    [1] => Array ( [0] => 2 [1] => two [2] => dos )
+    [2] => Array ( [0] => 3 [1] => three [2] => tres )
+    [3] => Array ( [0] => 4 [1] => four [2] => cuatro )
+    [4] => Array ( [0] => 5 [1] => five [2] => cinco )
+)
+```
+
+---
+
+### Example #5: Using array_map() with Associative Arrays
+
+```php
+$arr = [
+    'v1' => 'First release',
+    'v2' => 'Second release',
+    'v3' => 'Third release',
+];
+
+$callback = fn(string $k, string $v): string => "$k was the $v";
+
+$result = array_map($callback, array_keys($arr), array_values($arr));
+
+var_dump($result);
+```
+
+**Output:**
+
+```plaintext
+array(3) {
+  [0] => string(24) "v1 was the First release"
+  [1] => string(25) "v2 was the Second release"
+  [2] => string(24) "v3 was the Third release"
+}
+```
+
+---
+
+### Problem Example
+
+Given a dataset, extract the names of all non-smokers.
+
+```php
+$data = [
+    ["name" => "John", "smoker" => false],
+    ["name" => "Mary", "smoker" => true],
+    ["name" => "Peter", "smoker" => false],
+    ["name" => "Tony", "smoker" => true]
+];
+
+$names = array_filter(array_map(function($n) {
+    if (!$n['smoker']) return $n['name'];
+}, $data));
+
+print_r($names);
+```
+
+**Output:**
+
+```plaintext
+Array
+(
+    [0] => John
+    [2] => Peter
+)
 ```
